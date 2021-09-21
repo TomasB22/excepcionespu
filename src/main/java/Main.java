@@ -1,8 +1,6 @@
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Arrays;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -11,28 +9,30 @@ public class Main {
     }
 
     public static void iniciarPrograma() throws IOException {
-        leerArchivo("items.csv");
+        imprimirArray(leerArchivo());
     }
 
     public static String leerIngresoRuta(){
+        Scanner input = new Scanner(System.in);
         String ruta = "";
-
+        System.out.println("Ingresa la ruta del archivo: ");
 
         return ruta;
     }
 
-    public static void leerArchivo(String ruta) throws IOException {
-        BufferedReader csvReader = null;
-        try {
-            csvReader = new BufferedReader(new FileReader(ruta));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+    public static ArrayList<String> leerArchivo() throws IOException {
+        File file = new File(leerIngresoRuta());
+        Scanner input = new Scanner(file);
+        ArrayList<String> arr = new ArrayList<>();
+        while (input.hasNextLine()) {
+            arr.add(input.nextLine());
         }
-        String row="";
-        while ((row = csvReader.readLine()) != null) {
-            String[] data = row.split(",");
-            System.out.println(Arrays.toString(data));
+        return arr;
+    }
+
+    public static void imprimirArray(ArrayList<String> arr){
+        for (int i = 0; i < arr.size(); i++) {
+            System.out.println(arr.get(1));
         }
-        csvReader.close();
     }
 }
