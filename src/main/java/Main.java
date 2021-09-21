@@ -54,6 +54,7 @@ public class Main {
             case 3:
                 break;
             case 4:
+                mostrarMenuAnalisis ();
                 break;
             case 5:
                 System.out.println ("Programa finalizado");
