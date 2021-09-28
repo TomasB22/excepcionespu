@@ -1,24 +1,17 @@
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         iniciarPrograma();
-
     }
-
     public static void iniciarPrograma() throws IOException {
         leerArchivo("items.csv");
+        mostrarMenuPrincipal ();
     }
-
     public static String leerIngresoRuta(){
         String ruta = "";
-
-
         return ruta;
     }
 
@@ -48,6 +41,7 @@ public class Main {
     public static void switchesMenuPrincipal(){
         switch (validarMenu (5)){
             case 1:
+                escribirTxt ();
                 break;
             case 2:
                 break;
@@ -84,7 +78,6 @@ public class Main {
                 break;
         }
     }
-
     public static int validarMenu ( int x) {
         int n = -1;
         do {
@@ -101,5 +94,32 @@ public class Main {
             }
         } while (n < 0 || n > x);
         return n;
+    }
+    public static void escribirTxt(){
+        FileWriter fichero = null;
+        PrintWriter pw = null;
+        try
+        {
+            fichero = new FileWriter("prueba.txt");
+            pw = new PrintWriter(fichero);
+            pw.println ("ID;Item;Precio;Cantidad \n" +
+                    "1;Coca-Cola 3L;2490;5\n" +
+                    "2;Cepillo Dental;1090;2\n" +
+                    "3;Pisco Mistral 35° 1L;6290;3 \n" +
+                    "4;Lomo Liso natural 1.3kg;24687;2\n" +
+                    "5;Spaguetti 400g Cuidsine & Co;599;4");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                // Nuevamente aprovechamos el finally para
+                // asegurarnos que se cierra el fichero.
+                if (null != fichero)
+                    fichero.close();
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
     }
 }
